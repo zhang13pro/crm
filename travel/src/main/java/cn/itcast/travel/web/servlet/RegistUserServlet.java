@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -31,6 +32,24 @@ public class RegistUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //验证码
+        String check = req.getParameter("check");
+        HttpSession session = req.getSession();
+        String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+        session.removeAttribute("CHECKCODE_SERVER");
+        if (!checkcode_server.equalsIgnoreCase(check)){
+            ResultInfo info = new ResultInfo();
+            info.setFlag(false);
+            info.setErrorMsg("验证码错误");
+            //将info对象序列化成json
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(info);
+            //将json数据写回客户端
+            resp.setContentType("application/json;charset=utf-8");
+            resp.getWriter().write(json);
+            return;
+        }
+
         Map<String, String[]> map = req.getParameterMap();
         User user = new User();
         try {
