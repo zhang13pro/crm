@@ -18,7 +18,8 @@
 <div id="main">
     <div id="topMenu">
         <span class="tip">[在校生管理]</span>
-        <a href="学生添加.html" target="mainframe">
+        <%--TODO 添加模块--%>
+        <a href="stuAdd.jsp" target="mainframe">
             <img src="images/button/tianjia.gif">
         </a>
         <button class="btn" onClick="query()"/>
@@ -31,9 +32,9 @@
                     <td>
                         <select name="className" id="classId">
                             <option value="-1">--请选择班级--</option>
-                            <option value="1">Java基础班</option>
-                            <option value="2">Java中级班</option>
-                            <option value="3">Java高级班</option>
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                            <option value="3">C</option>
                         </select>
                     </td>
 
@@ -70,8 +71,8 @@
                 <td>${stu.stuState}</td>
                 <td>
                     <%--TODO 编辑 删除模块--%>
-                    <a href="学生编辑.html"><img src="images/button/modify.gif" class="img"></a>
-                    <a href=""><img src="images/button/delete.gif" class="img"></a>
+                    <a href="stuEdit.jsp?id=${stu.id}"><img src="images/button/modify.gif" class="img"></a>
+                    <a href="stuDelete.do?id=${stu.id}"><img src="images/button/delete.gif" class="img"></a>
                 </td>
             </tr>
             </c:forEach>

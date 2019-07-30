@@ -43,4 +43,9 @@ public class StuDao {
         JDBCUtil.close(rs,null,null);
         return stuList;
     }
+
+    public int addStudent(String stuName) {
+        String sql = "insert into crm_student(stuName) values('"+stuName+"')";
+        return JDBCUtil.executeUpdate(sql);
+    }
 }
