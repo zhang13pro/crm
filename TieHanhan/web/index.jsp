@@ -78,7 +78,7 @@
     <a href="javascript:void(0)" onClick="showMenu('menu3')">学工管理</a>
     <ul id="menu3" style="display:none">
       <li>
-        <a href="在校生管理.html" target="mainframe">在校生管理</a>
+        <a href="stuList.jsp" target="mainframe">在校生管理</a>
       </li>
       <li>
         <a href="升班转班.html" target="mainframe">学生升班转班</a>
