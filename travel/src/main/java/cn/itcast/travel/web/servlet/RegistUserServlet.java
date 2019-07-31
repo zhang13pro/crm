@@ -27,17 +27,19 @@ import java.util.Map;
 public class RegistUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+        doPost(req,resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+/*        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");*/
         //验证码
         String check = req.getParameter("check");
         HttpSession session = req.getSession();
         String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
         session.removeAttribute("CHECKCODE_SERVER");
-        if (!checkcode_server.equalsIgnoreCase(check)){
+        if (checkcode_server == null || !checkcode_server.equalsIgnoreCase(check)) {
             ResultInfo info = new ResultInfo();
             info.setFlag(false);
             info.setErrorMsg("验证码错误");
@@ -53,7 +55,7 @@ public class RegistUserServlet extends HttpServlet {
         Map<String, String[]> map = req.getParameterMap();
         User user = new User();
         try {
-            BeanUtils.populate(user,map);
+            BeanUtils.populate(user, map);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -63,9 +65,9 @@ public class RegistUserServlet extends HttpServlet {
         UserService service = new UserServiceImpl();
         boolean flag = service.regist(user);
         ResultInfo info = new ResultInfo();
-        if (flag){
+        if (flag) {
             info.setFlag(true);
-        }else {
+        } else {
             info.setFlag(false);
             info.setErrorMsg("注册失败");
         }

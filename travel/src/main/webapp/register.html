@@ -22,12 +22,12 @@
 			    * */
 			    var username = $("#username").val();
 			    //单词8-20位
-				var reg_username = /^\w{8,20}$/
-				var flag = reg_username.test(username)
+				var reg_username = /^\w{8,20}$/;
+				var flag = reg_username.test(username);
 				if (flag){
-                    $("#username").css("border","")
+                    $("#username").css("border","");
 				} else {
-				    $("#username").css("border","1px solid red")
+				    $("#username").css("border","1px solid red");
 					// alert("请输入正确格式")
 				}
 				// alert("校验用户名")
@@ -43,12 +43,12 @@
                 * */
                 var password = $("#password").val();
                 //单词8-20位
-                var reg_password = /^\w{8,20}$/
-                var flag = reg_password.test(password)
+                var reg_password = /^\w{8,20}$/;
+                var flag = reg_password.test(password);
                 if (flag){
-                    $("#password").css("border","")
+                    $("#password").css("border","");
                 } else {
-                    $("#password").css("border","1px solid red")
+                    $("#password").css("border","1px solid red");
                     // alert("请输入正确格式")
                 }
                 // alert("校验用户名")
@@ -62,21 +62,21 @@
 				var reg_email = /^\w+@\w+\.\w+$/;
 				var flag = reg_email.test(email);
 				if (flag){
-                    $("#email").css("border","")
+                    $("#email").css("border","");
 				}else {
-					$("#email").css("border","1px solid red")
+					$("#email").css("border","1px solid red");
 				}
 				return flag;
 			}
 
 			function checkTelephone(){
 			    var telephone = $("#telephone").val();
-			    var reg_telephone = /^[1]\d{10}$/
+			    var reg_telephone = /^[1]\d{10}$/;
 				var flag = reg_telephone.test(telephone);
 			    if (flag){
-			        $("#telephone").css("border","")
+			        $("#telephone").css("border","");
 				} else {
-                    $("#telephone").css("border","1px solid red")
+                    $("#telephone").css("border","1px solid red");
 				}
 				return flag;
 			}
@@ -96,23 +96,23 @@
 							}
                         })
 					}else {
-					    alert("未发送成功")
-						return false
+					    alert("未发送成功");
+						return false;
 					}
 					// return checkUsername() && checkPassword() && checkEmail() && checkTelephone()
-                })
+                });
 				$("#username").blur(function () {
-				    checkUsername()
-                })
+				    checkUsername();
+                });
 				$("#password").blur(function () {
-                    checkPassword()
-                })
+                    checkPassword();
+                });
 				$("#email").blur(function () {
-					checkEmail()
-                })
+					checkEmail();
+                });
 				$("#telephone").blur(function () {
-					checkTelephone()
-                })
+					checkTelephone();
+                });
             })
 		</script>
     </head>
@@ -127,7 +127,7 @@
     				<p>USER REGISTER</p>
     			</div>
     			<div class="rg_form_center">
-					<div id="errorMsg" style="color:red"></div>
+					<div id="errorMsg" style="color:red;text-align: center"></div>
 					<!--注册表单-->
     				<form id="registerForm">
 						<!--提交处理请求的标识符-->
@@ -179,7 +179,7 @@
     							</td>
     							<td class="td_right gender">
     								<input type="radio" id="sex" name="sex" value="男" checked> 男
-    								<input type="radio" name="sex" value="女"> 女
+									<input type="radio" name="sex" value="女"> 女
     							</td>
     						</tr>
     						<tr>
