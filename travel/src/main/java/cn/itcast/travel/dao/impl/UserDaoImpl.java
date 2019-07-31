@@ -40,4 +40,34 @@ public class UserDaoImpl implements UserDao {
                 user.getTelephone(),
                 user.getEmail());
     }
+
+    /*
+    * 根据激活码查询对象
+    * */
+    @Override
+    /*
+        Spring JdbcTemplate详解-----读取单个对象
+        String sql="select id,name,deptid from user where id=?";
+        RowMapper<User> rowMapper=new BeanPropertyRowMapper<User>(User.class);
+        User user= jdbcTemplate.queryForObject(sql, rowMapper,52);
+    */
+    public User findByCode(String code) {
+        User user = null;
+        try {
+            String sql = "select * from tab_user where code=?";
+            user = template.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),code);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    /*
+    * 修改指定用户激活码状态
+    * */
+    @Override
+    public void updateStatus(User user) {
+        String sql = "update tab_user set status='Y' where uid=?";
+        template.update(sql,user.getUid());
+    }
 }

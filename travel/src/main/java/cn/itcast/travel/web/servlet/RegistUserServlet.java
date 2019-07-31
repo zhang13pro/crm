@@ -66,8 +66,8 @@ public class RegistUserServlet extends HttpServlet {
         UserService service = new UserServiceImpl();
         boolean flag = service.regist(user);
         ResultInfo info = new ResultInfo();
-//       TODO if(flag) 逻辑怎么会对呢
-        if (flag == true) {
+//      if(flag)逻辑 --只有当flag为true时进入循环
+        if (flag) {
             info.setFlag(true);
         } else {
             info.setFlag(false);

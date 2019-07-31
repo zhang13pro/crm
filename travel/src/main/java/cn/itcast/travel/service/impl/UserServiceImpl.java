@@ -38,4 +38,16 @@ public class UserServiceImpl implements UserService {
 
         return true;
     }
+
+    @Override
+    public boolean active(String code) {
+        //1 根据激活码查找用户对象
+        User user = userDao.findByCode(code);
+        if (user != null){
+            //2 更新激活码
+            userDao.updateStatus(user);
+            return true;
+        }
+        return false;
+    }
 }
