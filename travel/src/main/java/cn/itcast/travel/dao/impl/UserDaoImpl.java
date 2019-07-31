@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @Version：1.0
  */
 public class UserDaoImpl implements UserDao {
+    //获取数据原 连接池对象
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
     @Override
     public User findByUsername(String username) {

@@ -87,8 +87,8 @@
 					if (checkUsername() && checkPassword() && checkEmail() && checkTelephone()){
 					    //JQuery使用表单对象 序列化获取信息
 					    $.post("registUserServlet",$("#registerForm").serialize(),function (data) {
-							//处理服务器响应的数据 data
-							if (data) {
+							//处理服务器响应的数据 data{flag:true,errorMsg:"注册失败"}
+                            if (data.flag) {
 							    //注册成功 跳转页面
 								Location.href = "register_ok.html";
 							}else {
@@ -128,8 +128,8 @@
     			</div>
     			<div class="rg_form_center">
 					<div id="errorMsg" style="color:red;text-align: center"></div>
-					<!--注册表单-->
-    				<form id="registerForm">
+					<!--注册表单 提交到user(为了看到效果)-->
+    				<form id="registerForm" action="user">
 						<!--提交处理请求的标识符-->
 						<input type="hidden" name="action" value="register">
     					<table style="margin-top: 25px;">

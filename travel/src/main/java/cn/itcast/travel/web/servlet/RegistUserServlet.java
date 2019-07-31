@@ -38,6 +38,7 @@ public class RegistUserServlet extends HttpServlet {
         String check = req.getParameter("check");
         HttpSession session = req.getSession();
         String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+        //验证码只能使用一次
         session.removeAttribute("CHECKCODE_SERVER");
         if (checkcode_server == null || !checkcode_server.equalsIgnoreCase(check)) {
             ResultInfo info = new ResultInfo();
@@ -51,7 +52,7 @@ public class RegistUserServlet extends HttpServlet {
             resp.getWriter().write(json);
             return;
         }
-
+        //获取数据并封装对象
         Map<String, String[]> map = req.getParameterMap();
         User user = new User();
         try {
@@ -61,17 +62,18 @@ public class RegistUserServlet extends HttpServlet {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
+        //调用service完成注册
         UserService service = new UserServiceImpl();
         boolean flag = service.regist(user);
         ResultInfo info = new ResultInfo();
-        if (flag) {
+//       TODO if(flag) 逻辑怎么会对呢
+        if (flag == true) {
             info.setFlag(true);
         } else {
             info.setFlag(false);
             info.setErrorMsg("注册失败");
         }
-        //将info对象序列化成json
+        //将info对象序列化成json以便写会
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(info);
         //将json数据写回客户端

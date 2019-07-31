@@ -4,6 +4,8 @@ import cn.itcast.travel.dao.UserDao;
 import cn.itcast.travel.dao.impl.UserDaoImpl;
 import cn.itcast.travel.domain.User;
 import cn.itcast.travel.service.UserService;
+import cn.itcast.travel.util.MailUtils;
+import cn.itcast.travel.util.UuidUtil;
 
 /**
  * @Author: bobobo
@@ -18,15 +20,22 @@ public class UserServiceImpl implements UserService {
     * */
     @Override
     public boolean regist(User user) {
-        /*
-        * 1 根据用户名查询用户对象
-        * 2 保存用户信息
-        * */
+        //      1 根据用户名查询用户对象
         User u = userDao.findByUsername(user.getUsername());
-        if (u != null){
+        //          * 2 保存用户信息
+        if (u != null) {
+            //用户名已存在
             return false;
-        }else
-            userDao.save(user);
+        }
+        //2.2 设置激活码
+        user.setCode(UuidUtil.getUuid());
+        //2.3 设置状态 N表示未激活
+        user.setStatus("N");
+        userDao.save(user);
+        // 3 激活邮件
+        String content = "<a href = 'http://localhost/travel/activeUserServlet?code="+user.getCode()+"'>点击激活开始旅行</a>";
+        MailUtils.sendMail(user.getEmail(),content,"激活邮件");
+
         return true;
     }
 }
