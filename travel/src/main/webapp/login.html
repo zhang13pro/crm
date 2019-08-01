@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>黑马旅游网-登录</title>  
+    <title>世贸旅游网-登录</title>
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -18,6 +18,22 @@
     <script src="js/angular.min.js"></script>
 	<!--导入jquery-->
 	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+        $(function () {
+            //1给登录绑定单击事件
+            $("#btn_sub").click(function () {
+                //2发送Ajax请求 提交表单数据
+                $.post("loginServlet",$("#loginForm").serialize(),function (data) {
+                    //3响应结果
+                    if (data.flag){
+                        Location.href="index.html";
+                    }else {
+                        $("#errorMsg").html(data.errorMsg);
+                    }
+                });
+            });
+        })
+	</script>
 </head>
 
 <body>
@@ -31,7 +47,7 @@
         <div class="login-box">
         	<div class="title">
         		<img src="images/login_logo.png" alt="">
-        		<span>欢迎登录黑马旅游账户</span>
+        		<span>欢迎登录世贸旅游账户</span>
         	</div>
         	<div class="login_inner">
 				
@@ -52,7 +68,7 @@
 					</script>
 			</div>
 			<div class="submit_btn">
-        				<button type="button">登录</button>
+        				<button type="button" id="btn_sub">登录</button>
         				<div class="auto_login">
         					<input type="checkbox" name="" class="checkbox">
         					<span>自动登录</span>
