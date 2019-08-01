@@ -1,7 +1,5 @@
 package cn.itcast.travel.web.servlet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,18 +9,16 @@ import java.io.IOException;
 
 /**
  * @Author: bobobo
- * @Date: 2019/8/1 9:36
+ * @Date: 2019/8/1 16:13
  * @Version：1.0
  */
-@WebServlet("/findUserServlet")
-public class FindUserServlet extends HttpServlet {
+@WebServlet("/exitServlet")
+public class ExitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //1从session中获取登陆用户
-        Object user = request.getSession().getAttribute("user");
-        //2写会客户端
-        ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json;charset=utf-8");
-        mapper.writeValue(response.getOutputStream(),user);
+        //1销毁session
+        request.getSession().invalidate();
+        //2跳转页面
+        response.sendRedirect(request.getContextPath()+"/login.html");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

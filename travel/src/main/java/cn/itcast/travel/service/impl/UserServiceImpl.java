@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         user.setStatus("N");
         userDao.save(user);
         // 3 激活邮件
-        String content = "<a href = 'http://localhost/travel/activeUserServlet?code="+user.getCode()+"'>点击激活开始旅行</a>";
+        String content = "<a href = 'http://localhost/travel/user/active?code="+user.getCode()+"'>点击激活开始旅行</a>";
         MailUtils.sendMail(user.getEmail(),content,"激活邮件");
 
         return true;
