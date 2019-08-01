@@ -15,4 +15,5 @@ public interface UserDao {
     User findByCode(String code);
 
     void updateStatus(User user);
+
 }
