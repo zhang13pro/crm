@@ -21,8 +21,8 @@ public class CharchaterFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse rep, FilterChain filterChain) throws IOException, ServletException {
-        //将父接口转为子接口
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
+/*        //将父接口转为子接口
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) rep;
         //获取请求方法
@@ -33,7 +33,10 @@ public class CharchaterFilter implements Filter {
         }
         //处理响应乱码
         response.setContentType("text/html;charset=UTF-8");
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request,response);*/
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        filterChain.doFilter(req,resp);
     }
 
 
